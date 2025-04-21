@@ -1,4 +1,4 @@
-// g++ -std=c++11 -O0 -o uhr uhr_2.cpp ../Tarea\ 1/codigos/brute_force.cpp ../Tarea\ 1/codigos/divide_and_conquer.cpp
+// g++ -std=c++20 -O0 -o uhr uhr_2.cpp ../src/brute_force/brute_force.cpp ../src/brute_force/brute_force_mejorado.cpp ../src/divide_and_conquer/divide_and_conquer.cpp ../src/divide_and_conquer/divide_and_conquer_mejorado.cpp
 // ./uhr testings 64 8 512 2 
 #include <cstdint>
 #include <chrono>
@@ -9,8 +9,10 @@
 #include <vector>
 
 #include "utils.cpp"
-#include "../Tarea 1/codigos/brute_force.hpp"
-#include "../Tarea 1/codigos/divide_and_conquer.hpp"
+#include "../src/brute_force/brute_force.hpp"
+#include "../src/brute_force/brute_force_mejorado.hpp"
+#include "../src/divide_and_conquer/divide_and_conquer.hpp"
+#include "../src/divide_and_conquer/divide_and_conquer_mejorado.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +34,8 @@ int main(int argc, char *argv[])
     std::mt19937_64 rng(rd());
 
     // Output files
-    std::ofstream out_bf("brute_force.csv");
-    std::ofstream out_dq("divide_and_conquer.csv");
+    std::ofstream out_bf("brute_force_vs.csv");
+    std::ofstream out_dq("brute_force_mejorado_vs.csv");
     out_bf << "n,t_mean,t_stdev,t_Q0,t_Q1,t_Q2,t_Q3,t_Q4" << std::endl;
     out_dq << "n,t_mean,t_stdev,t_Q0,t_Q1,t_Q2,t_Q3,t_Q4" << std::endl;
 
@@ -61,7 +63,7 @@ int main(int argc, char *argv[])
 
             // Test Divide and Conquer (usar los mismos puntos)
             begin_time = std::chrono::high_resolution_clock::now();
-            double result_dq = minDist_DQ(points);
+            double result_dq = minDist_BF_mejorado(points);
             end_time = std::chrono::high_resolution_clock::now();
             elapsed_time = end_time - begin_time;
             times_dq[i] = elapsed_time.count();

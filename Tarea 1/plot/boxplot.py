@@ -4,8 +4,8 @@ import numpy as np
 
 # Cargar los datos
 try:
-    bf_data = pd.read_csv('uhr-main/brute_force.csv')
-    dc_data = pd.read_csv('uhr-main/divide_and_conquer.csv')
+    bf_data = pd.read_csv('Tarea 1/testing/brute_force.csv')
+    dc_data = pd.read_csv('Tarea 1/testing/divide_and_conquer.csv')
     print("Archivos cargados correctamente")
 except FileNotFoundError as e:
     print(f"Error al cargar los archivos: {e}")

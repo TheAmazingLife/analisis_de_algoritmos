@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-#include "brute_force.hpp"
+#include "../brute_force/brute_force.hpp"
 
 bool compX(const std::pair<double, double> &p1, const std::pair<double, double> &p2);
 bool compY(const std::pair<double, double> &p1, const std::pair<double, double> &p2);

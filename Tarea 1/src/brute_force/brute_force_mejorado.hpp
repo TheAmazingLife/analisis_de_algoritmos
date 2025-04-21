@@ -7,6 +7,6 @@
 #include <limits>
 
 double calculateSquareDistance(std::pair<double, double> p1, std::pair<double, double> p2);
-double minSquareDist_BF(std::vector<std::pair<int, int>> &dots);
+double minDist_BF_mejorado(std::vector<std::pair<double, double>> &dots);
 
 #endif

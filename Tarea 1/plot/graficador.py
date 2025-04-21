@@ -4,8 +4,8 @@ import numpy as np
 
 # Usar las rutas relativas correctas proporcionadas
 try:
-    bf_data = pd.read_csv('uhr-main/brute_force.csv')
-    dc_data = pd.read_csv('uhr-main/divide_and_conquer.csv')
+    bf_data = pd.read_csv('Tarea 1/testing/brute_force.csv')
+    dc_data = pd.read_csv('Tarea 1/testing/divide_and_conquer.csv')
     print("Archivos cargados correctamente")
 except FileNotFoundError as e:
     print(f"Error al cargar los archivos: {e}")
@@ -89,4 +89,31 @@ plt.grid(True)
 plt.tight_layout()
 plt.savefig('speedup.pdf')
 plt.savefig('speedup.jpg', dpi=300)
+plt.show()
+
+# 6. Boxplot comparativo
+plt.figure(figsize=(15, 6))
+data_original = [
+    [bf_data['t_Q0'][i], bf_data['t_Q1'][i],
+     bf_data['t_Q2'][i], bf_data['t_Q3'][i],
+     bf_data['t_Q4'][i]] for i in range(len(bf_data))]
+data_mejorado = [
+    [dc_data['t_Q0'][i], dc_data['t_Q1'][i],
+     dc_data['t_Q2'][i], dc_data['t_Q3'][i],
+     dc_data['t_Q4'][i]] for i in range(len(dc_data))]
+
+positions = np.arange(len(bf_data['n'])) * 3
+plt.boxplot(data_original, positions=positions-0.5, labels=bf_data['n'], patch_artist=True,
+           boxprops=dict(facecolor='C0', color='C0'))  # C0 es el primer color del ciclo de matplotlib
+plt.boxplot(data_mejorado, positions=positions+0.5, labels=dc_data['n'], patch_artist=True,
+           boxprops=dict(facecolor='C1', color='C1'))  # C1 es el segundo color del ciclo
+
+plt.xlabel('Tamaño del problema (n)')
+plt.ylabel('Tiempo (ns)')
+plt.title('Distribución de tiempos de ejecución')
+plt.legend(['Fuerza Bruta', 'Divide y Vencerás'], loc='upper left')
+plt.grid(True)
+plt.tight_layout()
+plt.savefig('vs_boxplot.pdf')
+plt.savefig('vs_boxplot.png', dpi=300)
 plt.show()

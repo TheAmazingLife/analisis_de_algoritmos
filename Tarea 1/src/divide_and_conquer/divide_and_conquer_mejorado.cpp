@@ -1,24 +1,26 @@
 #include "divide_and_conquer_mejorado.hpp"
+#include <algorithm>
+#include <vector>
 
 // Ordenar puntos por coordenada x
-bool compXDQ(const std::pair<int, int> &p1, const std::pair<int, int> &p2) {
+bool compXDQ(const std::pair<double, double> &p1, const std::pair<double, double> &p2) {
     return p1.first < p2.first;
 }
 
 // Ordenar puntos por coordenada y
-bool compYDQ(const std::pair<int, int> &p1, const std::pair<int, int> &p2) {
+bool compYDQ(const std::pair<double, double> &p1, const std::pair<double, double> &p2) {
     return p1.second < p2.second;
 }
 
-double minDistCentroDQ(std::vector<std::pair<int, int>> &centro, double d) {
+double minDistCentroDQ(std::vector<std::pair<double, double>> &centro, double d) {
+    // Ensure centro is a std::vector for compatibility with std::sort
     // Ordenar los puntos por coordenada y
     std::sort(centro.begin(), centro.end(), compYDQ);
-
     double minSqrtDist = d * d; // Almacenamos la distancia minima al cuadrado
     double centroSize = centro.size();
+
     for (size_t i = 0; i < centroSize; i++) {
         for (size_t j = i + 1; j < centroSize && (centro[j].second - centro[i].second) < d; j++) {
-
             double nuevaDist = calculateSquareDistance(centro[i], centro[j]);
             //minSqrtDist = std::min(minSqrtDist, nuevaDist);
 
@@ -32,7 +34,7 @@ double minDistCentroDQ(std::vector<std::pair<int, int>> &centro, double d) {
     return sqrt(minSqrtDist);
 }
 
-double minDistDQ(std::vector<std::pair<int, int>> &dots, int left, int right) {
+double minDistDQ(std::vector<std::pair<double, double>> &dots, int left, int right) {
     // Caso base: si hay 2 o menos puntos, usamos fuerza bruta
     if (right - left <= 3) {
         double minSqrtDist = std::numeric_limits<double>::max();
@@ -56,7 +58,7 @@ double minDistDQ(std::vector<std::pair<int, int>> &dots, int left, int right) {
     double d = std::min(dIzq, dDer);
 
     // Crear un vector para almacenar los puntos dentro de la distancia d
-    std::vector<std::pair<int, int>> centro;
+    std::vector<std::pair<double, double>> centro;
     for (int i = left; i < right; i++) {
         if (abs(dots[i].first - dots[mid].first) < d) {
             centro.push_back(dots[i]);
@@ -66,7 +68,7 @@ double minDistDQ(std::vector<std::pair<int, int>> &dots, int left, int right) {
     return std::min(d, minDistCentroDQ(centro, d));
 }
 
-double minDist_DQ_Mejorado(std::vector<std::pair<int, int>> &dots) {
+double minDist_DQ_Mejorado(std::vector<std::pair<double, double>> &dots) {
     // Ordenar los puntos por coordenada x
     std::sort(dots.begin(), dots.end(), compXDQ);
 
