@@ -7,6 +7,6 @@
 #include <limits>
 
 double calculateDistance(std::pair<double, double> p1, std::pair<double, double> p2);
-double minDist_BF(std::vector<std::pair<int, int>> &dots);
+double minDist_BF(std::vector<std::pair<double, double>> &dots);
 
 #endif

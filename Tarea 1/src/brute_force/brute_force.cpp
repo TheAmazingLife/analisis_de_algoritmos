@@ -2,14 +2,14 @@
 
 // Funcion que calcula la distancia euclidea entre 2 puntos
 double calculateDistance (std::pair<double, double> p1, std::pair<double, double> p2) {
-    return sqrt(pow(p1. first - p2. first , 2) + pow(p1.second - p2.second , 2));
+    return sqrt(pow(p1.first - p2.first, 2) + pow(p1.second - p2.second, 2));
 }
 
 // Distancia minima entre 2 puntos usando fuerza bruta
 // Esta funcion recibe un vector de puntos y devuelve la distancia minima entre 2 puntos
 // La distancia minima se calcula usando la formula de distancia euclidea
 // La complejidad de esta funcion es O(n^2) ya que se compara cada punto con todos los puntos
-double minDist_BF(std::vector<std::pair<int, int>> &dots) {
+double minDist_BF(std::vector<std::pair<double, double>> &dots) {
     // Declaracion de variable que almacena minima distancia
     double minDistance = std::numeric_limits<double>::max();
 
